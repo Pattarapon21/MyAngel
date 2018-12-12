@@ -14,16 +14,39 @@
 
     <!--Logo-->
 <ImageView
+    android:layout_gravity="center_horizontal"
     android:src="@drawable/logo"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
     <!--Email-->
-
+<EditText
+    android:hint="Email"
+    android:inputType="textEmailAddress"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
     <!--Password-->
-
+    <EditText
+        android:hint="Password"
+        android:inputType="textPassword"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
     <!--Login-->
 
+    <Button
+        android:layout_gravity="center_horizontal"
+        android:text="Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <!--Register-->
+    <TextView
+        android:clickable="true"
+        android:id="@+id/txtRegister"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/h2"
+        android:layout_gravity="center_horizontal"
+        android:text="Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
