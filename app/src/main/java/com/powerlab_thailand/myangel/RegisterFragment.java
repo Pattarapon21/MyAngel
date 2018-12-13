@@ -86,12 +86,12 @@ public class RegisterFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 String uidString = firebaseAuth.getUid();
 
-                                UserModel userModel = new UserModel(uidString, nameString,"Hello")
+                                UserModel userModel = new UserModel(uidString, nameString,"Hello");
 
                                 FirebaseDatabase firebaseDatabase =FirebaseDatabase.getInstance();
                                 DatabaseReference databaseReference = firebaseDatabase.getReference()
                                         .child("User")
-                                        .child("uidString");
+                                        .child(uidString);
                                 databaseReference.setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {

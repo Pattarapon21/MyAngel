@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="message_have_space">โปรดกรอก ทุกช่อง</string>
+    <string name="title_have_space">มีช่องว่าง</string>
 </resources>
