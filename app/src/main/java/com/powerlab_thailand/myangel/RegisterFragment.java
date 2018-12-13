@@ -2,12 +2,25 @@ package com.powerlab_thailand.myangel;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -30,9 +43,83 @@ public class RegisterFragment extends Fragment {
 
     } //Main Method
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        if (item.getItemId() == R.id.itemUpload) {
+            checkValueAndUpload();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void checkValueAndUpload() {
+        //Get Value From Edit Text To String
+        // Data Type Variable Name = Value
+        EditText nameEditText = getView().findViewById(R.id.edtName);
+        EditText emailEditText = getView().findViewById(R.id.edtEmail);
+        EditText passwordEditText = getView().findViewById(R.id.edtPassword);
+
+        final String nameString = nameEditText.getText().toString().trim();
+        String emailString = emailEditText.getText().toString().trim();
+        String passwordString = passwordEditText.getText().toString().trim();
+
+        final MyAlert myAlert = new MyAlert(getActivity());
+
+//        Check Space
+        if (nameString.isEmpty()||emailString.isEmpty()||passwordString.isEmpty()) {
+
+            myAlert.normalDialog("Have Space","Please Fill every Blank");
+//            Have Space
+        } //if
+
+        else {
+//            No Space
+            final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.createUserWithEmailAndPassword(emailString,passwordString)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String uidString = firebaseAuth.getUid();
+
+                                UserModel userModel = new UserModel(uidString, nameString,"Hello")
+
+                                FirebaseDatabase firebaseDatabase =FirebaseDatabase.getInstance();
+                                DatabaseReference databaseReference = firebaseDatabase.getReference()
+                                        .child("User")
+                                        .child("uidString");
+                                databaseReference.setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                     getActivity().getSupportFragmentManager().popBackStack();
+                                    }
+                                });
+
+
+
+                            } else {
+                                myAlert.normalDialog("Cannot Register",task.getException().toString());
+                            }
+                        }
+                    });
+        } //else
+
+
+    } //check
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_register, menu);
+    }
+
     private void createToolbar() {
         Toolbar toolbar = getView().findViewById(R.id.toolbarRegister);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Register");
         ((MainActivity) getActivity()).getSupportActionBar().setSubtitle(R.string.message_have_space);
         ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
@@ -44,6 +131,9 @@ public class RegisterFragment extends Fragment {
 
             }
         });
+
+        setHasOptionsMenu(true);
+
 
     }
 

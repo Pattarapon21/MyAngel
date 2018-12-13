@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "888352630319",
+    "firebase_url": "https://myangel-9b29f.firebaseio.com",
+    "project_id": "myangel-9b29f",
+    "storage_bucket": "myangel-9b29f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888352630319:android:0fce3216090d86cb",
+        "android_client_info": {
+          "package_name": "com.powerlab_thailand.myangel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888352630319-ro1kemn67ippc97sth01h25kfhl2b89a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.powerlab_thailand.myangel",
+            "certificate_hash": "d6cffbe24a7a25ddc7281846daf67050b8e12af7"
+          }
+        },
+        {
+          "client_id": "888352630319-p7c438bedhch6mcir4scec718v732704.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9JENuYMqBDRQTEkQa084e8pPqnG04XIk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888352630319-p7c438bedhch6mcir4scec718v732704.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
